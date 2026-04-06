@@ -1,0 +1,17 @@
+{
+  "name": "1pstartupblog",
+  "version": "1.0.0",
+  "description": "Static markdown blog deployed to https://1pstartup.com/blog",
+  "main": "index.js",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "marked": "^17.0.6"
+  }
+}

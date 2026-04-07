@@ -5,6 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "node scripts/build.js",
+    "publish:dry": "bash scripts/publish.sh dryrun",
+    "publish:deploy": "bash scripts/publish.sh deploy",
+    "publish:setup": "bash scripts/publish.sh setup",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,6 +15,6 @@
   "license": "ISC",
   "dependencies": {
     "gray-matter": "^4.0.3",
-    "marked": "^17.0.6"
+    "marked": "^4.3.0"
   }
 }

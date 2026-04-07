@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1020"/>
+      <stop offset="55%" stop-color="#101935"/>
+      <stop offset="100%" stop-color="#1a2452"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.10)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.05)"/>
+    </linearGradient>
+    <filter id="blurGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="40"/>
+    </filter>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+    <style>
+      .title { font: 700 56px 'Inter','Arial',sans-serif; fill: #ffffff; }
+      .subtitle { font: 400 26px 'Inter','Arial',sans-serif; fill: #cbd5e1; }
+      .section { font: 700 28px 'Inter','Arial',sans-serif; fill: #ffffff; }
+      .label { font: 700 22px 'Inter','Arial',sans-serif; fill: #ffffff; }
+      .body { font: 400 20px 'Inter','Arial',sans-serif; fill: #dbe4f0; }
+      .small { font: 400 18px 'Inter','Arial',sans-serif; fill: #9fb1c8; }
+      .pct { font: 700 46px 'Inter','Arial',sans-serif; fill: #ffffff; }
+      .line { stroke: rgba(255,255,255,0.22); stroke-width: 3; fill: none; }
+    </style>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#bg)"/>
+
+  <circle cx="180" cy="150" r="170" fill="#5eead4" opacity="0.18" filter="url(#blurGlow)"/>
+  <circle cx="1410" cy="120" r="150" fill="#60a5fa" opacity="0.20" filter="url(#blurGlow)"/>
+  <circle cx="1320" cy="780" r="220" fill="#a78bfa" opacity="0.12" filter="url(#blurGlow)"/>
+
+  <text class="title" x="90" y="105">The Two-Sided 80/20 Split of AI Vibe Coding</text>
+  <text class="subtitle" x="90" y="150">Not one-way replacement, but simultaneous re-sorting of programmers and domain experts.</text>
+
+  <rect x="590" y="185" width="420" height="88" rx="24" fill="url(#card)" stroke="rgba(255,255,255,0.16)" filter="url(#shadow)"/>
+  <text class="section" x="800" y="240" text-anchor="middle">AI Vibe Coding Wave</text>
+
+  <path d="M800 273 L800 340" class="line"/>
+  <circle cx="800" cy="340" r="7" fill="#7dd3fc"/>
+
+  <path d="M430 340 L1170 340" class="line"/>
+  <path d="M430 340 L430 380" class="line"/>
+  <path d="M1170 340 L1170 380" class="line"/>
+
+  <rect x="235" y="382" width="390" height="88" rx="24" fill="url(#card)" stroke="rgba(255,255,255,0.14)" filter="url(#shadow)"/>
+  <text class="section" x="430" y="437" text-anchor="middle">Programmers</text>
+
+  <rect x="975" y="382" width="390" height="88" rx="24" fill="url(#card)" stroke="rgba(255,255,255,0.14)" filter="url(#shadow)"/>
+  <text class="section" x="1170" y="437" text-anchor="middle">Domain Experts</text>
+
+  <path d="M430 470 L430 520" class="line"/>
+  <path d="M1170 470 L1170 520" class="line"/>
+  <path d="M300 520 L560 520" class="line"/>
+  <path d="M1040 520 L1300 520" class="line"/>
+  <path d="M300 520 L300 550" class="line"/>
+  <path d="M560 520 L560 550" class="line"/>
+  <path d="M1040 520 L1040 550" class="line"/>
+  <path d="M1300 520 L1300 550" class="line"/>
+
+  <rect x="165" y="550" width="270" height="250" rx="28" fill="rgba(244,63,94,0.15)" stroke="rgba(244,63,94,0.40)" filter="url(#shadow)"/>
+  <text class="pct" x="300" y="620" text-anchor="middle">80%</text>
+  <text class="label" x="300" y="665" text-anchor="middle">Implementers</text>
+  <text class="body" x="300" y="710" text-anchor="middle">Execution-focused</text>
+  <text class="body" x="300" y="742" text-anchor="middle">developers</text>
+  <text class="small" x="300" y="780" text-anchor="middle">Value compressed</text>
+
+  <rect x="455" y="550" width="270" height="250" rx="28" fill="rgba(34,197,94,0.15)" stroke="rgba(34,197,94,0.42)" filter="url(#shadow)"/>
+  <text class="pct" x="590" y="620" text-anchor="middle">20%</text>
+  <text class="label" x="590" y="665" text-anchor="middle">Architects / PM</text>
+  <text class="body" x="590" y="710" text-anchor="middle">System thinking</text>
+  <text class="body" x="590" y="742" text-anchor="middle">and product judgment</text>
+  <text class="small" x="590" y="780" text-anchor="middle">Value increases</text>
+
+  <rect x="905" y="550" width="270" height="250" rx="28" fill="rgba(244,63,94,0.15)" stroke="rgba(244,63,94,0.40)" filter="url(#shadow)"/>
+  <text class="pct" x="1040" y="620" text-anchor="middle">80%</text>
+  <text class="label" x="1040" y="665" text-anchor="middle">Can't adapt</text>
+  <text class="body" x="1040" y="710" text-anchor="middle">Blocked by tools,</text>
+  <text class="body" x="1040" y="742" text-anchor="middle">workflow, or mindset</text>
+  <text class="small" x="1040" y="780" text-anchor="middle">Displaced</text>
+
+  <rect x="1195" y="550" width="270" height="250" rx="28" fill="rgba(34,197,94,0.15)" stroke="rgba(34,197,94,0.42)" filter="url(#shadow)"/>
+  <text class="pct" x="1330" y="620" text-anchor="middle">20%</text>
+  <text class="label" x="1330" y="665" text-anchor="middle">New builders</text>
+  <text class="body" x="1330" y="710" text-anchor="middle">Cross the coding barrier</text>
+  <text class="body" x="1330" y="742" text-anchor="middle">with AI</text>
+  <text class="small" x="1330" y="780" text-anchor="middle">Build products</text>
+</svg>

@@ -16,26 +16,57 @@ Static markdown blog deployed to https://1pstartup.com/blog
 
 ## Content Source
 
-`/Users/demai/work/FIRE51/VIBECODING.md` — outlines for 13 blog posts (B1–B13) about building FIRE51 via vibe coding. Each section maps to one published post.
+`/Users/demai/work/FIRE51/VIBECODING.md` — skeleton and raw material for 13 blog posts (B1–B13).
+
+**Not extracted directly.** Each post is written fresh, drawing ideas and structure from VIBECODING.md but with proper narrative flow, accessible examples, images, and a voice tuned for a general audience.
 
 ---
 
 ## Workflow
 
-1. Extract post content from `FIRE51/VIBECODING.md`
-2. Write English markdown post in `/content/en/`
-3. Translate to Chinese, save in `/content/zh/`
-4. Build static HTML → `/public/blog`
-5. Deploy to server under `/var/www/1pstartup/blog`
+1. Read the relevant section in `FIRE51/VIBECODING.md` for ideas and structure
+2. Write a fresh English post in `content/en/` — narrative style, general audience
+3. Write Chinese version in `content/zh/` — not a direct translation, tuned for Chinese readers
+4. Set `date` in frontmatter to schedule publish
+5. Build static HTML → `public/blog/`
+6. Deploy to server under `/var/www/1pstartup-blog/`
 
 ---
 
 ## Implementation Plan
 
-1. **Build static site generator** — `scripts/build.js`, `templates/post.html`, `templates/index.html`
-2. **Create first post** — extract B1 from `FIRE51/VIBECODING.md` into `/content/en/`, translate to `/content/zh/`, verify build output
-3. **Wire up nginx** — add `/blog` location to `1pstartup/nginx/1pstartup.conf`
-4. **Publish script** — `scripts/publish.sh` builds and deploys to server, skips future-dated posts
+- [x] Build static site generator — `scripts/build.js`, templates, bilingual support
+- [x] B0 and B1 posts written (EN + ZH) with hero images, mobile screenshots, series banner
+- [x] Nginx `/blog` location wired up (`1pstartup/nginx/1pstartup.conf`)
+- [x] Deploy script — `scripts/publish.sh` with dry-run, setup, and deploy modes
+- [x] Live at https://1pstartup.com/blog
+
+---
+
+## Next Steps
+
+- [ ] **Add Blog link to 1pstartup.com nav** — add `<li><a href="/blog">Blog</a></li>` to top nav and footer in `1pstartup/index.html` (lines ~442 and ~531)
+- [ ] **Write B2** — "Start with the Architecture Doc, Not the Code" (ref: FIRE51/VIBECODING.md §B2)
+- [ ] **Write B6** — "From Idea to Production in Days" — Wave 1 post #3 per publishing order
+- [ ] **Write B13** — "What Does Vibe Coding Actually Cost?" — Wave 1 post #4
+- [ ] **Add Mermaid diagram support** — add one `<script>` tag to post template for flow diagrams
+- [ ] **Screenshots for B0** — add FIRE51.com and 1pstartup.com screenshots where the projects are mentioned
+
+---
+
+## Commands
+
+```bash
+npm run build              # build locally
+bash scripts/publish.sh dryrun    # preview what would change on server
+bash scripts/publish.sh deploy    # build + deploy to production
+```
+
+Local preview:
+```bash
+npx serve public -p 4000
+# then open http://localhost:4000/blog/en/
+```
 
 ---
 

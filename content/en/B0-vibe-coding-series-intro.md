@@ -1,10 +1,11 @@
 ---
-title: "Why I Built FIRE51 — AI Just Punched Through the Paper Wall of Coding"
+title: "Why I Built FIRE51 — Alice Just Punched Through the Paper Wall of Coding"
 date: 2026-04-06
 lang: en
 slug: vibe-coding-series-intro
 series: vibecoding
 episode: 0
+author: MaiMai
 ---
 
 ![](/blog/assets/B0_hero_en.svg)
@@ -16,6 +17,31 @@ The real change is this: **the barrier to building software is disappearing.**
 For decades, the tech industry ran on a hidden structure — lots of people with ideas, very few who could implement them. Programming languages, frameworks, architecture, deployment: these technical details formed a towering barrier. No matter how deep your expertise, if you couldn't cross it, your ideas stayed ideas.
 
 Vibe coding is tearing that down — exposing what was always just a paper wall pretending to be stone.
+
+---
+
+## Alice's MemPalace
+
+I'm not the only one proving this out.
+
+Milla Jovovich — actress, best known as Alice in the Resident Evil franchise — just open-sourced an AI memory system on GitHub and scored the first-ever perfect score on the industry-standard benchmark. Yes, that Milla Jovovich 🤯
+
+<div class="story-images">
+  <figure>
+    <img src="/blog/assets/B0_Resident-Evil.jpg" alt="Milla Jovovich as Alice in Resident Evil">
+    <figcaption>Milla Jovovich as Alice — now also a GitHub contributor with 11k stars</figcaption>
+  </figure>
+  <figure>
+    <img src="/blog/assets/B0_Greek_oratory.avif" alt="Ancient Greek memory palace technique">
+    <figcaption>Ancient Greek orators memorized entire speeches using imaginary buildings — the inspiration for MemPalace</figcaption>
+  </figure>
+</div>
+
+Here's the story: after months of daily AI conversations, she'd accumulated hundreds of decisions, ideas, and thinking — all of it disappearing at the end of every session. Existing memory systems let the AI decide what's worth remembering. That wasn't what she wanted.
+
+So she and a friend spent a few months building [MemPalace](https://github.com/milla-jovovich/mempalace) with Claude Code. The concept draws from the ancient Greek memory palace technique: instead of extracting summaries, you organize memory into a navigable spatial structure — wings, halls, rooms. The result: the first perfect score on the LongMemEval benchmark, MIT licensed, fully local, 11,000+ GitHub stars.
+
+**When the barrier to coding disappears, what determines the ceiling is domain knowledge, systems thinking, and product judgment.** MemPalace is living proof.
 
 ---
 

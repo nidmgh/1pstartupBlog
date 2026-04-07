@@ -5,6 +5,7 @@ lang: en
 slug: what-vibe-coding-feels-like
 series: vibecoding
 episode: 1
+author: MaiMai
 ---
 
 I spent over a decade writing code — fast fingers, quick turnaround, always first to finish. But I never quite understood why speed felt so hollow. Later, as an architect and product manager, I finally knew what customers and markets wanted. The thinking was sharp. But execution ran through other people, and something always got lost in translation — fidelity, nuance, the original intent.

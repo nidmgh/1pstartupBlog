@@ -45,12 +45,28 @@ Static markdown blog deployed to https://1pstartup.com/blog
 
 ## Next Steps
 
+### Connect blog to main site
 - [ ] **Add Blog link to 1pstartup.com nav** — add `<li><a href="/blog">Blog</a></li>` to top nav and footer in `1pstartup/index.html` (lines ~442 and ~531)
-- [ ] **Write B2** — "Start with the Architecture Doc, Not the Code" (ref: FIRE51/VIBECODING.md §B2)
-- [ ] **Write B6** — "From Idea to Production in Days" — Wave 1 post #3 per publishing order
-- [ ] **Write B13** — "What Does Vibe Coding Actually Cost?" — Wave 1 post #4
-- [ ] **Add Mermaid diagram support** — add one `<script>` tag to post template for flow diagrams
-- [ ] **Screenshots for B0** — add FIRE51.com and 1pstartup.com screenshots where the projects are mentioned
+
+### Complete Wave 1 posts (publishing order: B0 → B1 → B6 → B13)
+Wave 1 goal: hook readers, prove it works, remove the cost objection early.
+
+- [x] **B0** — "Why I Built FIRE51 — Alice Just Punched Through the Paper Wall of Coding" ✅ live
+- [x] **B1** — "What Vibe Coding Actually Feels Like" ✅ live
+- [ ] **B6** — "From Idea to Production in Days, Not Months"
+  - Ref: `FIRE51/VIBECODING.md §B6`
+  - Show the full timeline (4 weeks), what shipped, key enablers
+  - Include FIRE51 report/chart screenshots
+  - Hero image needed (EN + ZH)
+- [ ] **B13** — "What Does Vibe Coding Actually Cost?"
+  - Ref: `FIRE51/VIBECODING.md §B13`
+  - Full cost table: domain, Lightsail, Claude Code, ChatGPT, Cursor, hardware
+  - Under $55/month total — remove the accessibility objection
+  - Hero image needed (EN + ZH)
+
+### Polish
+- [ ] **Screenshots for B0** — add FIRE51.com and 1pstartup.com website screenshots where the two projects are mentioned
+- [ ] **Add Mermaid diagram support** — one `<script>` tag in post template; useful for B6 timeline and B2 architecture diagrams
 
 ---
 

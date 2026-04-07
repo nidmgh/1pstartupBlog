@@ -5,6 +5,7 @@ lang: zh
 slug: what-vibe-coding-feels-like
 series: vibecoding
 episode: 1
+author: 迈哥
 translated: true
 ---
 

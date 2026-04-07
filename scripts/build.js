@@ -85,12 +85,17 @@ function buildPost(post, lang) {
     ? SERIES_BANNERS[post.series][lang] || ''
     : '';
 
+  const authorTag = post.author
+    ? `<span class="author">— ${post.author}</span>`
+    : '';
+
   const html = render(readTemplate('post.html'), {
     lang,
     title:      post.title,
     date:       post.date,
     langSwitch,
     seriesBanner,
+    authorTag,
     content:    marked.parse(post.body),
   });
 

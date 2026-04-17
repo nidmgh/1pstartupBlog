@@ -1,5 +1,9 @@
 # Vibe Coding — 技巧、经验与最佳实践（中文版）
 
+## 系列标题
+**英文：** Vibe Coding — The Real Test of Product Thinking and Architecture
+**中文：** Vibe Coding — 产品思维与架构能力的试金石
+
 本文内容来自构建 FIRE51 的过程——一款面向生产环境的退休规划 Web 应用，含 iOS/Android 壳、JWT 认证、服务端 PDF 导出与税务验证流水线，完全通过 AI 辅助编程完成。
 
 本文件是一个博客系列的原始素材，每个章节对应一篇潜在文章。
@@ -624,3 +628,13 @@ FIRE51 的 `CLAUDE.md` 在精简后从 196 行减少到 69 行。留下的是：
 - CLAUDE.md 必须保持简短——它是 AI 每次会话必读的文档；臃肿意味着纪律规则被埋没或忽视
 - 发布第一阶段后，在所有文档中对"V1"进行 grep 发现了 5 个过时引用：被标记为"计划中"或"尚未实现"的功能实际上已经上线——在每次重大里程碑后进行文档审计
 - 将设计文档与实际源代码对照阅读（MODULE2、TAX_ENGINE）发现了 4 个主要差距：SS 暂定收入测试、NIIT、IRMAA 和收敛循环都已实现，但仍被标记为 V2 未来工作——文档/代码偏差会静默积累
+- Helmet 8 CSP 会静默添加 `script-src-attr: 'none'`，即使 `script-src` 里已有 `'unsafe-inline'`——所有 `onclick=` 处理器都被破坏；需要显式设置 `scriptSrcAttr: ["'unsafe-inline'"]`
+- `CALENDAR_YEAR_AT_START` 作为模块级常量在长运行的 Node.js 进程中会变得过时——应改为每个场景调用一次的函数
+- 一次性下载令牌（TTL 60 秒，首次使用即消耗）可以干净地替代 URL 中的 JWT，无需 httpOnly cookie——也能和 Capacitor 配合使用
+- 计算→报告之间的 Summary 屏：服务器在完成响应里返回 `summaryCards` 和 `earlyOutAge`；客户端在跳转到报告前先渲染 2×2 网格配解读性文案
+- PDF 信号量（最多 1 个并发 Chrome）能防止 2 vCPU / 1.9 GB 服务器上的 OOM——第二个请求会透明排队，浏览器自然显示"下载待处理"
+- 测试 profile 抽到 `public/test-profiles.js`——无需构建步骤即可编辑；index.html 在运行时读取 `window.TEST_PROFILES`
+- PM2 会把环境变量缓存进它的 dump；`--update-env` 能添加/覆盖，但从不删除——删除一个变量得 `pm2 delete <app> && bash setup.sh`；测试模式开关改用文件标记（`.test-mode`）彻底绕开这个坑
+- 每次会话结束前一定要提交——上下文上限的摘要不会捕获未提交的工作区改动；服务器只拿得到已 push 的内容
+- AI 产品里并非每个功能都要调用 LLM：顾问信（300 字的个性化报告摘要）是纯模板替换——确定性、零 API 成本、零延迟、零幻觉风险；判断类用 LLM，结构类用模板
+- 按年切换州税配置实现"搬去 FL"：把 `getStateTaxConfig()` 从年循环外移到年循环内，只改了 2 行就解锁了模拟中途的州切换；关键是 `computeTax()` 本来就接受 `StateTaxConfig` 作为参数——不需要改签名

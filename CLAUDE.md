@@ -103,6 +103,32 @@ translated: true
 
 Slug must match between EN and ZH.
 
+Optional fields:
+
+- `publishedAt: 2026-04-07T15:30:00-07:00` — full ISO 8601 timestamp. Used **only** for ordering; never rendered. When two posts share a `date`, `publishedAt` decides which comes first.
+- `modified: YYYY-MM-DD` — added when a post is revised after its first live publish. Rendered as "Last updated YYYY-MM-DD" below the published date.
+
+---
+
+# Date Immutability
+
+Once a post is deployed to live, its `date:` never changes — doing so would silently shift URLs, RSS order, and index position for readers who saw the old date.
+
+If you revise a published post, add a `modified:` field instead. This keeps the original publish date stable and surfaces the revision honestly.
+
+Only unpublished drafts may have their `date:` edited freely.
+
+---
+
+# Post Ordering
+
+Posts sort by date/time descending:
+
+1. Primary key: `publishedAt` if present, else `date` at midnight UTC
+2. Tie-breaker: higher `episode` first
+
+`publishedAt` is internal — it exists so two posts published on the same day still have a stable order — but the timestamp itself is never shown to readers.
+
 ---
 
 # URL Structure

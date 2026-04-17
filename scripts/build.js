@@ -47,13 +47,21 @@ function loadPosts(lang) {
       const dateStr = data.date instanceof Date
     ? data.date.toISOString().slice(0, 10)
     : String(data.date).slice(0, 10);
-  return { ...data, date: dateStr, body: content, file: f };
+  const modifiedStr = data.modified instanceof Date
+    ? data.modified.toISOString().slice(0, 10)
+    : data.modified ? String(data.modified).slice(0, 10) : null;
+  const publishedAtRaw = data.publishedAt instanceof Date
+    ? data.publishedAt.toISOString()
+    : data.publishedAt ? String(data.publishedAt) : null;
+  return { ...data, date: dateStr, modified: modifiedStr, publishedAt: publishedAtRaw, body: content, file: f };
     })
     .filter(p => p.date && p.date <= TODAY)   // skip future posts (date already normalized to YYYY-MM-DD)
     .sort((a, b) => {
-      const dateCmp = b.date.localeCompare(a.date);
-      if (dateCmp !== 0) return dateCmp;
-      // same date: higher episode number first
+      // Primary sort: publishedAt timestamp if present, else date at midnight UTC
+      const ta = new Date(a.publishedAt || a.date + 'T00:00:00Z').getTime();
+      const tb = new Date(b.publishedAt || b.date + 'T00:00:00Z').getTime();
+      if (tb !== ta) return tb - ta;
+      // Tie-breaker: higher episode number first
       return (b.episode || 0) - (a.episode || 0);
     });
 }
@@ -94,6 +102,11 @@ function buildPost(post, lang) {
     ? `<span class="author">— ${post.author}</span>`
     : '';
 
+  const modifiedLabel = lang === 'zh' ? '最后更新' : 'Last updated';
+  const modifiedTag = post.modified
+    ? `<span class="modified">${modifiedLabel} ${post.modified}</span>`
+    : '';
+
   const html = render(readTemplate('post.html'), {
     lang,
     title:      post.title,
@@ -101,6 +114,7 @@ function buildPost(post, lang) {
     langSwitch,
     seriesBanner,
     authorTag,
+    modifiedTag,
     content:    marked.parse(post.body),
   });
 

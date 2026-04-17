@@ -44,6 +44,7 @@
       align-items: center;
     }
     .author { color: var(--muted); font-size: 0.85rem; }
+    .modified { color: var(--muted); font-size: 0.8rem; font-style: italic; }
     .lang-switch a {
       color: var(--green);
       text-decoration: none;
@@ -194,6 +195,7 @@
     <h1>{{title}}</h1>
     <div class="meta">
       <span>{{date}}</span>
+      {{modifiedTag}}
       {{authorTag}}
       <span class="lang-switch">{{langSwitch}}</span>
     </div>

@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#080d1a"/>
+      <stop offset="55%" stop-color="#0d1830"/>
+      <stop offset="100%" stop-color="#111e3a"/>
+    </linearGradient>
+    <linearGradient id="barSV" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#f87171"/>
+    </linearGradient>
+    <linearGradient id="barLS" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#fbbf24"/>
+    </linearGradient>
+    <linearGradient id="barThis" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#4ade80"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="40"/>
+    </filter>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.035)" stroke-width="1"/>
+    </pattern>
+    <style>
+      .t-head { font: 700 48px 'Inter','Arial',sans-serif; fill: #ffffff; }
+      .t-sub  { font: 400 22px 'Inter','Arial',sans-serif; fill: #64748b; }
+      .t-sec  { font: 700 22px 'Inter','Arial',sans-serif; fill: #ffffff; }
+      .t-cat  { font: 700 18px 'Inter','Arial',sans-serif; }
+      .t-val  { font: 700 28px 'Inter','Arial',sans-serif; fill: #ffffff; }
+      .t-note { font: 400 16px 'Inter','Arial',sans-serif; fill: #64748b; }
+      .t-leg  { font: 400 17px 'Inter','Arial',sans-serif; fill: #cbd5e1; }
+      .t-prc  { font: 600 17px 'Inter','Arial',sans-serif; fill: #94a3b8; }
+      .t-center-big { font: 700 38px 'Inter','Arial',sans-serif; fill: #ffffff; }
+      .t-center-sub { font: 400 16px 'Inter','Arial',sans-serif; fill: #94a3b8; }
+      .divider { stroke: rgba(255,255,255,0.08); stroke-width: 1; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#grid)"/>
+
+  <!-- Glow orbs -->
+  <circle cx="300"  cy="300" r="200" fill="#ef4444" opacity="0.06" filter="url(#glow)"/>
+  <circle cx="1350" cy="500" r="220" fill="#22c55e" opacity="0.07" filter="url(#glow)"/>
+  <circle cx="800"  cy="180" r="150" fill="#3b82f6" opacity="0.08" filter="url(#glow)"/>
+
+  <!-- Title -->
+  <text class="t-head" x="800" y="76" text-anchor="middle">What AI Coding Actually Costs</text>
+  <text class="t-sub"  x="800" y="112" text-anchor="middle">From big-company platforms to a garage startup — the numbers tell the story</text>
+
+  <!-- Divider -->
+  <line x1="80" y1="136" x2="1520" y2="136" class="divider"/>
+
+  <!-- Vertical center divider -->
+  <line x1="800" y1="150" x2="800" y2="840" class="divider"/>
+
+  <!-- ══════ LEFT PANEL: Cost Comparison Bars ══════ -->
+  <text class="t-sec" x="440" y="178" text-anchor="middle">Monthly AI Cost Comparison</text>
+
+  <!-- Tier 1: Silicon Valley ($4,000–6,000/month) -->
+  <rect x="88" y="210" width="660" height="170" rx="16"
+        fill="rgba(239,68,68,0.08)" stroke="rgba(239,68,68,0.25)" stroke-width="1.5" filter="url(#shadow)"/>
+  <text class="t-cat" x="108" y="242" fill="#f87171">Silicon Valley</text>
+  <text class="t-note" x="108" y="262">Big-company platforms · $200–300/day · spikes past $1,000</text>
+  <rect x="108" y="276" width="612" height="44" rx="8" fill="url(#barSV)" opacity="0.85"/>
+  <text class="t-val" x="724" y="306" text-anchor="end">$4,000–6,000</text>
+  <text class="t-note" x="108" y="342">/month per developer</text>
+
+  <!-- Tier 2: Lean Startup ($1,000+/month) -->
+  <rect x="88" y="400" width="660" height="170" rx="16"
+        fill="rgba(245,158,11,0.08)" stroke="rgba(245,158,11,0.22)" stroke-width="1.5" filter="url(#shadow)"/>
+  <text class="t-cat" x="108" y="432" fill="#fbbf24">Lean Domestic Startup</text>
+  <text class="t-note" x="108" y="452">Trying to be frugal · still running $1,000+/month</text>
+  <rect x="108" y="466" width="150" height="44" rx="8" fill="url(#barLS)" opacity="0.85"/>
+  <text class="t-val" x="268" y="496" text-anchor="start" dx="12">$1,000+</text>
+  <text class="t-note" x="108" y="532">/month · still significant for a garage startup</text>
+
+  <!-- Tier 3: This Stack ($53/month) -->
+  <rect x="88" y="590" width="660" height="170" rx="16"
+        fill="rgba(34,197,94,0.10)" stroke="rgba(34,197,94,0.28)" stroke-width="1.5" filter="url(#shadow)"/>
+  <text class="t-cat" x="108" y="622" fill="#4ade80">This Stack (FIRE51)</text>
+  <text class="t-note" x="108" y="642">Modular design · intentional prompts · minimal waste</text>
+  <rect x="108" y="656" width="7" height="44" rx="3" fill="url(#barThis)" opacity="0.95"/>
+  <text class="t-val" x="124" y="686" dx="4" fill="#4ade80">$53</text>
+  <text class="t-note" x="108" y="732">/month · total stack including hosting, domain, tools</text>
+
+  <!-- Scale callout -->
+  <rect x="88" y="778" width="660" height="44" rx="10"
+        fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <text x="418" y="806" text-anchor="middle"
+        font-family="'Inter',sans-serif" font-size="16" fill="#94a3b8">
+    Same output. 99% lower AI tool cost. The gap is modular design.
+  </text>
+
+  <!-- ══════ RIGHT PANEL: $53 Breakdown Donut ══════ -->
+  <text class="t-sec" x="1200" y="178" text-anchor="middle">Where the $53/month Goes</text>
+
+  <!-- Donut chart — center 1200, 470, r=150 -->
+  <!-- Slice 1: Claude Code — 38% — blue — 0° to 136.8° -->
+  <circle cx="1200" cy="470" r="175" fill="#3b82f6" opacity="0.04" filter="url(#glow)"/>
+  <path d="M 1200 470 L 1350 470 A 150 150 0 0 1 1091 573 Z" fill="#3b82f6" opacity="0.85"/>
+  <!-- Slice 2: ChatGPT — 38% — purple — 136.8° to 273.6° -->
+  <path d="M 1200 470 L 1091 573 A 150 150 0 0 1 1209 320 Z" fill="#8b5cf6" opacity="0.85"/>
+  <!-- Slice 3: Lightsail — 23% — teal — 273.6° to 356.4° -->
+  <path d="M 1200 470 L 1209 320 A 150 150 0 0 1 1350 461 Z" fill="#06b6d4" opacity="0.85"/>
+  <!-- Slice 4: Domain — 1% — amber — 356.4° to 360° -->
+  <path d="M 1200 470 L 1350 461 A 150 150 0 0 1 1350 470 Z" fill="#f59e0b" opacity="0.90"/>
+
+  <!-- Donut hole -->
+  <circle cx="1200" cy="470" r="88" fill="#0d1830"/>
+  <text class="t-center-big" x="1200" y="464" text-anchor="middle">$53</text>
+  <text class="t-center-sub" x="1200" y="490" text-anchor="middle">/month</text>
+
+  <!-- Donut borders -->
+  <circle cx="1200" cy="470" r="150" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="2"/>
+  <circle cx="1200" cy="470" r="88"  fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="2"/>
+
+  <!-- Slice percentage labels on connectors -->
+  <line x1="1308" y1="418" x2="1362" y2="398" stroke="#3b82f6" stroke-width="1.5" opacity="0.5" stroke-dasharray="4 3"/>
+  <text x="1368" y="402" font-family="'Inter',sans-serif" font-size="14" fill="#3b82f6" opacity="0.8">38%</text>
+
+  <line x1="1108" y1="560" x2="1058" y2="582" stroke="#8b5cf6" stroke-width="1.5" opacity="0.5" stroke-dasharray="4 3"/>
+  <text x="996" y="586" font-family="'Inter',sans-serif" font-size="14" fill="#8b5cf6" opacity="0.8">38%</text>
+
+  <line x1="1278" y1="326" x2="1316" y2="300" stroke="#06b6d4" stroke-width="1.5" opacity="0.5" stroke-dasharray="4 3"/>
+  <text x="1322" y="304" font-family="'Inter',sans-serif" font-size="14" fill="#06b6d4" opacity="0.8">23%</text>
+
+  <!-- ── Legend (two columns: label | price+pct) ── -->
+  <!-- Col 1 anchor x=894 (label), Col 2 anchor x=1120 (price) — 226px gap, no overlap -->
+
+  <rect x="870" y="660" width="16" height="16" rx="3" fill="#3b82f6"/>
+  <text class="t-leg" x="896" y="673">Claude Code</text>
+  <text class="t-prc" x="1120" y="673">$20/mo</text>
+  <text class="t-note" x="1188" y="673">(38%)</text>
+
+  <rect x="870" y="692" width="16" height="16" rx="3" fill="#8b5cf6"/>
+  <text class="t-leg" x="896" y="705">ChatGPT</text>
+  <text class="t-prc" x="1120" y="705">$20/mo</text>
+  <text class="t-note" x="1188" y="705">(38%)</text>
+
+  <rect x="870" y="724" width="16" height="16" rx="3" fill="#06b6d4"/>
+  <text class="t-leg" x="896" y="737">AWS Lightsail</text>
+  <text class="t-prc" x="1120" y="737">$12/mo</text>
+  <text class="t-note" x="1188" y="737">(23%)</text>
+
+  <rect x="870" y="756" width="16" height="16" rx="3" fill="#f59e0b"/>
+  <text class="t-leg" x="896" y="769">Domain (IONOS)</text>
+  <text class="t-prc" x="1120" y="769">~$1/mo</text>
+  <text class="t-note" x="1188" y="769">(1%)</text>
+
+  <rect x="870" y="788" width="16" height="16" rx="3" fill="rgba(255,255,255,0.14)" stroke="rgba(255,255,255,0.28)" stroke-width="1"/>
+  <text class="t-leg" x="896" y="801">Cursor IDE</text>
+  <text class="t-prc" x="1120" y="801" fill="#4ade80">$0</text>
+  <text class="t-note" x="1188" y="801">(free tier)</text>
+
+  <!-- Bottom note -->
+  <line x1="80" y1="840" x2="1520" y2="840" class="divider"/>
+  <text x="800" y="876" text-anchor="middle"
+        font-family="'Inter',sans-serif" font-size="17" fill="#475569">
+    Hardware: sunk cost (MacBook Pro M1, 8 GB) · Real constraint is
+    <tspan font-weight="700" fill="#cbd5e1"> attention, not money</tspan>
+  </text>
+</svg>

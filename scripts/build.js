@@ -50,7 +50,12 @@ function loadPosts(lang) {
   return { ...data, date: dateStr, body: content, file: f };
     })
     .filter(p => p.date && p.date <= TODAY)   // skip future posts (date already normalized to YYYY-MM-DD)
-    .sort((a, b) => b.date.localeCompare(a.date));
+    .sort((a, b) => {
+      const dateCmp = b.date.localeCompare(a.date);
+      if (dateCmp !== 0) return dateCmp;
+      // same date: higher episode number first
+      return (b.episode || 0) - (a.episode || 0);
+    });
 }
 
 // ── build one post ────────────────────────────────────────────────────────────

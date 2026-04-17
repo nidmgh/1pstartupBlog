@@ -5,8 +5,9 @@
 # on the Lightsail server. Never touches /var/www/1pstartup/ (the main site).
 #
 # Usage:
-#   bash scripts/publish.sh           # dry run (shows what would change)
-#   bash scripts/publish.sh deploy    # real deploy
+#   bash scripts/publish.sh                    # dry run (shows what would change)
+#   bash scripts/publish.sh deploy             # real deploy (requires clean + pushed)
+#   bash scripts/publish.sh deploy --allow-dirty  # override preflight
 #
 # First-time server setup (run once):
 #   bash scripts/publish.sh setup
@@ -68,6 +69,42 @@ fi
 
 # ── 4. Deploy ─────────────────────────────────────────────────────────────────
 if [ "$ACTION" = "deploy" ]; then
+  # Preflight: refuse to deploy from dirty or unpushed working tree.
+  # Why: rsync --delete overwrites the server. Deploying uncommitted work
+  # means live has content that only exists on this laptop — if anything
+  # overwrites it later, the only version is gone. (We hit this on 2026-04-17.)
+  # Escape hatch: bash scripts/publish.sh deploy --allow-dirty
+  if [ "$2" != "--allow-dirty" ]; then
+    echo "→ Preflight: checking git state..."
+    if [ -n "$(git status --porcelain)" ]; then
+      echo ""
+      echo "  ✗ Working tree has uncommitted changes:"
+      git status --short | sed 's/^/    /'
+      echo ""
+      echo "  Commit them first, or re-run with --allow-dirty to override."
+      exit 1
+    fi
+    git fetch origin main --quiet
+    LOCAL=$(git rev-parse HEAD)
+    REMOTE=$(git rev-parse origin/main)
+    if [ "$LOCAL" != "$REMOTE" ]; then
+      BASE=$(git merge-base HEAD origin/main)
+      echo ""
+      if [ "$LOCAL" = "$BASE" ]; then
+        echo "  ✗ Local branch is behind origin/main. Pull first."
+      else
+        echo "  ✗ Local has commits not pushed to GitHub:"
+        git log --oneline origin/main..HEAD | sed 's/^/    /'
+        echo ""
+        echo "  Push with: git push origin main"
+      fi
+      echo "  (or re-run with --allow-dirty to override)"
+      exit 1
+    fi
+    echo "  ✓ Clean working tree, in sync with origin/main."
+    echo ""
+  fi
+
   echo "→ Syncing to server (only /var/www/1pstartup-blog — main site untouched)..."
   rsync -az --delete \
     -e "ssh -i $PEM" \

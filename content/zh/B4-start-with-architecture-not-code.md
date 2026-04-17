@@ -1,6 +1,6 @@
 ---
-title: 从架构文档开始，而不是代码
-date: 2026-04-28
+title: 架构文档是核心，代码留给CC
+date: 2026-04-17
 lang: zh
 slug: start-with-architecture-not-code
 series: vibecoding
@@ -9,7 +9,7 @@ translated: true
 author: 迈哥
 ---
 
-<!-- Image placeholder: architecture-first concept illustration -->
+![](/blog/assets/B4_Hero_B.png)
 
 2025 年，"Vibe Coding" 意味着敲一条 Prompt，看着 AI 生成一点东西。到了 2026 年，行业给出了一个名字来解释这条路在真实项目上为什么走不通：**Spec-Driven Development（规格驱动开发）**。AWS 推出了 Kiro，一个围绕 Specify → Plan → Execute 工作流构建的 IDE。GitHub 开源的 Spec Kit 突破了 84,000 颗星。分析师在 2026 年 3 月 [盘点出 30 多个竞争中的规格优先框架](https://medium.com/@visrow/spec-driven-development-is-eating-software-engineering-a-map-of-30-agentic-coding-frameworks-6ac0b5e2b484)。
 

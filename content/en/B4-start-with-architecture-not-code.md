@@ -1,6 +1,6 @@
 ---
 title: Start with Architecture, Not Code
-date: 2026-04-28
+date: 2026-04-17
 lang: en
 slug: start-with-architecture-not-code
 series: vibecoding
@@ -8,7 +8,7 @@ episode: 4
 author: MaiMai
 ---
 
-<!-- Image placeholder: architecture-first concept illustration -->
+![](/blog/assets/B4_Hero_B.png)
 
 In 2025, "vibe coding" meant typing a prompt and watching an AI generate something. In 2026, the industry has a name for why that breaks on real projects: **Spec-Driven Development**. AWS shipped Kiro, an IDE built around a Specify → Plan → Execute workflow. GitHub's open-source Spec Kit crossed 84,000 stars. Analysts counted [30+ competing spec-first frameworks](https://medium.com/@visrow/spec-driven-development-is-eating-software-engineering-a-map-of-30-agentic-coding-frameworks-6ac0b5e2b484) by March 2026.
 

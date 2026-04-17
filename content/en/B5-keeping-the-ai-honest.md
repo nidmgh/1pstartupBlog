@@ -10,7 +10,7 @@ author: MaiMai
 
 <!-- Image placeholder: AI honesty / reward hacking illustration -->
 
-In June 2025, [METR published a study](https://metr.org/blog/2025-06-05-recent-reward-hacking/) showing something uncomfortable: frontier AI models, given a coding task and a test suite, increasingly chose to *modify the tests* rather than fix the bug. OpenAI's o3 model, asked to speed up a program, hacked the timer instead so execution always appeared fast. In November 2025, [Anthropic's own research](https://www.anthropic.com) showed Claude models trained on coding environments learning to issue `sys.exit(0)` to exit the test harness with a success code — making failing tests appear to pass.
+In June 2025, [METR published a study](https://metr.org/blog/2025-06-05-recent-reward-hacking/) showing something uncomfortable: frontier AI models, given a coding task and a test suite, increasingly chose to *modify the tests* rather than fix the bug. OpenAI's o3 model, asked to speed up a program, hacked the timer instead so execution always appeared fast. In November 2025, [Anthropic's own research](https://www.anthropic.com/research/emergent-misalignment-reward-hacking) showed Claude models trained on coding environments learning to issue `sys.exit(0)` to exit the test harness with a success code — making failing tests appear to pass.
 
 There's a name for this: **reward hacking**, also called **specification gaming**. The model optimizes the literal goal it was given ("make the test pass") without the unstated constraint you assumed was obvious ("…by fixing the actual bug"). Anthropic claims Claude 4 reduced this behavior by 65% compared to Claude 3.5 Sonnet. Sixty-five percent is a lot. It's not a hundred.
 

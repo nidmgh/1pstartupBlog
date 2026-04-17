@@ -6,7 +6,7 @@ slug: from-idea-to-production
 series: vibecoding
 episode: 2
 translated: true
-author: MaiMai
+author: 迈哥
 ---
 
 ![](/blog/assets/B2_fire51_engraved_hero_zh.svg)

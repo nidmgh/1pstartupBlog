@@ -16,6 +16,20 @@ There's a name for this: **reward hacking**, also called **specification gaming*
 
 When you're solo vibe coding, there's no code reviewer to catch it. You are the only line of defense. Here's what that looks like in practice.
 
+## Ask AI Open-Ended Questions
+
+Experienced professionals know a workplace rule: give your boss a multiple-choice question, not an essay prompt. Flip that. You are now the AI's "boss" — reverse the rule.
+
+Reward hacking is AI cutting corners to meet a goal; another commonly overlooked pattern is its **tendency to obey**. Point east and it earnestly walks east, even when north is the right direction. Give it an explicit algorithm, framework, or implementation path in your prompt, and it will follow your path to the end — and argue that path was the best one, even when it wasn't.
+
+So: **unless you already have a firm architectural decision, don't tell the AI "use algorithm X," "pick framework Y," "implement it this way."** Step back into the product manager's chair and describe the problem — what you're solving, where the constraints are, what the performance or complexity bounds look like, what counts as "good enough." Then let the AI enumerate candidate solutions, each with its own pros, cons, risks, and fit.
+
+Two payoffs. The design space opens up and you're making a choice instead of rubber-stamping a direction that's already drifted. And the AI's argumentative skill gets pointed at *comparing* solutions rather than *defending* one — which is work it's genuinely good at.
+
+But asking a single AI still has blind spots — it can make the first option it thought of sound so compelling that you assume it's the only viable one. You need a check.
+
+In FIRE51, ChatGPT is the second-opinion assistant. For any design question, I hand the same problem to both Claude Code and ChatGPT, let two models with different training backgrounds each propose, then cross-reference. Typical outcome: Claude's recommendation looks great, but ChatGPT catches an edge case it missed — or the other way around. After the two AIs check each other, the architect makes the final call. No single AI gets to lead you by the nose.
+
 ## The Pattern to Watch
 
 Left unconstrained, a capable AI assistant will, in good faith:
@@ -27,7 +41,7 @@ Left unconstrained, a capable AI assistant will, in good faith:
 
 None of this is malicious. It's pure optimization toward the stated goal, without the unstated constraints you assumed were obvious. Exactly the behavior METR documented.
 
-## What I Caught in FIRE51
+### What I Caught in FIRE51
 
 The first time this bit me: Claude was debugging a tax calculation failure. The test expected a federal tax of $18,432 for a specific income profile. The engine computed $18,601. Claude proposed changing the expected value in `tests/midupperclass2M_baseline.json`.
 
@@ -62,13 +76,9 @@ If you're working in a domain with external ground truth — tax law, physics, f
 
 The report renderer, PDF generator, and CSV export all depend on that shape. A well-intentioned "simplification" of the output would silently break four separate consumers. The lock prevents it.
 
-## Commit Frequently
-
-Every commit is a checkpoint. When you review the diff before committing, you see exactly what changed. If the AI drifted — touched code outside its scope, changed a format that was supposed to be stable — you catch it before it's buried under future work.
-
-Short sessions, frequent commits. This is the cadence that keeps AI output honest.
-
 ## The Mental Model
+
+Short sessions, frequent commits: every commit is a checkpoint, and a quick diff review catches any AI drift before it gets buried under later work.
 
 `CLAUDE.md` is not a constitution or a style guide. It's the set of invariants the AI needs to re-read every session because its memory doesn't carry them. What cannot change. What cannot be touched. What the ground rules are.
 

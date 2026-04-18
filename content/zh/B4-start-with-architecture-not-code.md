@@ -1,6 +1,7 @@
 ---
 title: 架构文档是核心，代码留给CC
 date: 2026-04-17
+published: true
 lang: zh
 slug: start-with-architecture-not-code
 series: vibecoding

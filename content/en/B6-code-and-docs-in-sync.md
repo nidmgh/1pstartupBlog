@@ -1,6 +1,7 @@
 ---
 title: "Code and Docs in Sync: A Three-Layer System"
 date: 2026-04-18
+published: true
 lang: en
 slug: code-and-docs-in-sync
 series: vibecoding

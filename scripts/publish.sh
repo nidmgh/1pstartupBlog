@@ -5,9 +5,16 @@
 # on the Lightsail server. Never touches /var/www/1pstartup/ (the main site).
 #
 # Usage:
-#   bash scripts/publish.sh                    # dry run (shows what would change)
-#   bash scripts/publish.sh deploy             # real deploy (requires clean + pushed)
-#   bash scripts/publish.sh deploy --allow-dirty  # override preflight
+#   bash scripts/publish.sh                              # dry run (shows what would change)
+#   bash scripts/publish.sh deploy                       # FULL sync — pushes every published post
+#                                                          and removes anything on server not in build (--delete).
+#                                                          Use only for site-wide changes (CSS, template, etc.).
+#   bash scripts/publish.sh deploy <slug> [<slug>...]    # SCOPED sync — pushes ONLY the named posts
+#                                                          (EN+ZH) plus index pages and assets. No --delete.
+#                                                          Default mode for publishing or updating individual posts.
+#   bash scripts/publish.sh deploy <args> --allow-dirty  # override preflight (also works with no slugs)
+#
+# Posts only build if frontmatter has `published: true`. Drafts are invisible.
 #
 # First-time server setup (run once):
 #   bash scripts/publish.sh setup
@@ -69,12 +76,24 @@ fi
 
 # ── 4. Deploy ─────────────────────────────────────────────────────────────────
 if [ "$ACTION" = "deploy" ]; then
+  # Parse remaining args: slugs (positional) vs --allow-dirty flag.
+  ALLOW_DIRTY=0
+  SLUGS=()
+  shift  # drop "deploy"
+  for arg in "$@"; do
+    if [ "$arg" = "--allow-dirty" ]; then
+      ALLOW_DIRTY=1
+    else
+      SLUGS+=("$arg")
+    fi
+  done
+
   # Preflight: refuse to deploy from dirty or unpushed working tree.
-  # Why: rsync --delete overwrites the server. Deploying uncommitted work
-  # means live has content that only exists on this laptop — if anything
+  # Why: rsync overwrites the server. Deploying uncommitted work means
+  # live has content that only exists on this laptop — if anything
   # overwrites it later, the only version is gone. (We hit this on 2026-04-17.)
-  # Escape hatch: bash scripts/publish.sh deploy --allow-dirty
-  if [ "$2" != "--allow-dirty" ]; then
+  # Escape hatch: --allow-dirty
+  if [ "$ALLOW_DIRTY" = "0" ]; then
     echo "→ Preflight: checking git state..."
     if [ -n "$(git status --porcelain)" ]; then
       echo ""
@@ -105,10 +124,45 @@ if [ "$ACTION" = "deploy" ]; then
     echo ""
   fi
 
-  echo "→ Syncing to server (only /var/www/1pstartup-blog — main site untouched)..."
-  rsync -az --delete \
-    -e "ssh -i $PEM" \
-    "$LOCAL_DIR" "$HOST:$REMOTE_DIR/"
+  if [ "${#SLUGS[@]}" -eq 0 ]; then
+    # ── Full sync (no slugs given) ──────────────────────────────────────────
+    echo "→ FULL sync to server (rsync --delete — anything on server not in build will be removed):"
+    rsync -az --delete \
+      -e "ssh -i $PEM" \
+      "$LOCAL_DIR" "$HOST:$REMOTE_DIR/"
+  else
+    # ── Scoped sync (only named slugs + indexes + assets) ──────────────────
+    echo "→ SCOPED sync to server (no --delete) — pushing slugs:"
+    for s in "${SLUGS[@]}"; do echo "    • $s"; done
+    echo ""
+
+    # Verify each slug actually built (catches typos and missing `published: true`).
+    for s in "${SLUGS[@]}"; do
+      if [ ! -d "${LOCAL_DIR}en/$s" ] && [ ! -d "${LOCAL_DIR}zh/$s" ]; then
+        echo "  ✗ Slug '$s' did not build in either /en or /zh."
+        echo "    Check the slug spelling and that frontmatter has 'published: true'."
+        exit 1
+      fi
+    done
+
+    # Push each slug's EN + ZH directory (whichever exists).
+    for s in "${SLUGS[@]}"; do
+      for lang in en zh; do
+        if [ -d "${LOCAL_DIR}${lang}/$s" ]; then
+          rsync -az -e "ssh -i $PEM" \
+            "${LOCAL_DIR}${lang}/$s/" \
+            "$HOST:$REMOTE_DIR/${lang}/$s/"
+        fi
+      done
+    done
+
+    # Always refresh index pages (they list posts) and assets (for new images).
+    rsync -az -e "ssh -i $PEM" "${LOCAL_DIR}en/index.html" "$HOST:$REMOTE_DIR/en/index.html"
+    rsync -az -e "ssh -i $PEM" "${LOCAL_DIR}zh/index.html" "$HOST:$REMOTE_DIR/zh/index.html"
+    rsync -az -e "ssh -i $PEM" "${LOCAL_DIR}index.html"    "$HOST:$REMOTE_DIR/index.html"
+    rsync -az -e "ssh -i $PEM" "${LOCAL_DIR}assets/"       "$HOST:$REMOTE_DIR/assets/"
+  fi
+
   ssh -i "$PEM" "$HOST" "find $REMOTE_DIR -type f | xargs chmod 644 && find $REMOTE_DIR -type d | xargs chmod 755"
   echo "  Sync complete."
   echo ""
@@ -116,5 +170,5 @@ if [ "$ACTION" = "deploy" ]; then
   exit 0
 fi
 
-echo "Usage: bash scripts/publish.sh [dryrun|deploy|setup]"
+echo "Usage: bash scripts/publish.sh [dryrun|deploy [slug...] [--allow-dirty]|setup]"
 exit 1

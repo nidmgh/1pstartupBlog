@@ -2,6 +2,7 @@
 title: What Does Vibe Coding Actually Cost?
 date: 2026-04-07
 modified: 2026-04-17
+published: true
 lang: en
 slug: what-does-vibe-coding-cost
 series: vibecoding

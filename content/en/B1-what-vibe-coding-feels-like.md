@@ -1,6 +1,7 @@
 ---
 title: What Vibe Coding Actually Feels Like
 date: 2026-04-06
+published: true
 lang: en
 slug: what-vibe-coding-feels-like
 series: vibecoding

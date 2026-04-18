@@ -103,6 +103,10 @@ translated: true
 
 Slug must match between EN and ZH.
 
+Required for the post to appear on the live site:
+
+- `published: true` — gates whether `build.js` includes the post. Without this flag, the post is a draft and is invisible to the build (and therefore to the deploy). Drafts can sit in `content/` indefinitely without leaking onto the live site.
+
 Optional fields:
 
 - `publishedAt: 2026-04-07T15:30:00-07:00` — full ISO 8601 timestamp. Used **only** for ordering; never rendered. When two posts share a `date`, `publishedAt` decides which comes first.
@@ -173,11 +177,12 @@ Target:
 
 2–4 posts per week
 
-Scheduling handled by date field.
+A post goes live only when:
 
-Only publish when:
+1. Frontmatter has `published: true`, AND
+2. The post is explicitly named in a deploy command (or pulled in by a full sync).
 
-post.date <= today
+Date is **not** an automatic publish trigger. A post with `published: true` and a future date will still show in the build and deploy — the date is purely the rendered "publish day" shown to readers.
 
 ---
 
@@ -222,17 +227,19 @@ Keep implementation simple.
 
 # Deployment
 
-Output directory:
+Output directory: `/public/blog` (gets rsync'd to `https://1pstartup.com/blog`).
 
-/public/blog
+Deploy via `scripts/publish.sh`. Two modes:
 
-This will be deployed to:
+- **Scoped** (default — use this for new posts and updates):
+  `bash scripts/publish.sh deploy <slug> [<slug>...]`
+  Pushes only the named posts (EN+ZH) plus index pages and assets. Does **not** delete anything else on the server. This is the safe, surgical path.
 
-https://1pstartup.com/blog
+- **Full sync** (use sparingly — only for site-wide changes like CSS or template tweaks):
+  `bash scripts/publish.sh deploy`
+  Runs `rsync --delete` — anything on the server but not in the local build is removed. Posts without `published: true` will be wiped.
 
-Deployment handled externally.
-
-Do not add deployment complexity.
+Preflight check refuses to deploy from a dirty or unpushed working tree (override with `--allow-dirty`).
 
 ---
 

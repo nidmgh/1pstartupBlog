@@ -1,6 +1,7 @@
 ---
 title: "Why I Built FIRE51 — Alice Just Punched Through the Paper Wall of Coding"
 date: 2026-04-06
+published: true
 lang: en
 slug: vibe-coding-series-intro
 series: vibecoding

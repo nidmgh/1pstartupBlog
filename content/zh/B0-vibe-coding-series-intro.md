@@ -1,6 +1,7 @@
 ---
 title: "为什么我构建了 FIRE51 —— Alice捅破编程的窗户纸"
 date: 2026-04-06
+published: true
 lang: zh
 slug: vibe-coding-series-intro
 series: vibecoding

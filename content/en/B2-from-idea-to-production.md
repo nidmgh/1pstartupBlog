@@ -1,6 +1,7 @@
 ---
 title: "40 Hours: From Idea to Production"
 date: 2026-04-07
+published: true
 lang: en
 slug: from-idea-to-production
 series: vibecoding

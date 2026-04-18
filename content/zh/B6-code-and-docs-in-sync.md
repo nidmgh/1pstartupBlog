@@ -1,6 +1,7 @@
 ---
 title: 代码与文档同步：三层强制机制
 date: 2026-04-18
+published: true
 lang: zh
 slug: code-and-docs-in-sync
 series: vibecoding

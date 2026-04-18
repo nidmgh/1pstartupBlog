@@ -53,9 +53,9 @@ function loadPosts(lang) {
   const publishedAtRaw = data.publishedAt instanceof Date
     ? data.publishedAt.toISOString()
     : data.publishedAt ? String(data.publishedAt) : null;
-  return { ...data, date: dateStr, modified: modifiedStr, publishedAt: publishedAtRaw, body: content, file: f };
+  return { ...data, date: dateStr, modified: modifiedStr, publishedAt: publishedAtRaw, published: data.published === true, body: content, file: f };
     })
-    .filter(p => p.date && p.date <= TODAY)   // skip future posts (date already normalized to YYYY-MM-DD)
+    .filter(p => p.published === true)        // only build posts explicitly marked `published: true`
     .sort((a, b) => {
       // Primary sort: publishedAt timestamp if present, else date at midnight UTC
       const ta = new Date(a.publishedAt || a.date + 'T00:00:00Z').getTime();

@@ -2,6 +2,7 @@
 title: Vibe Coding 究竟要花多少钱？
 date: 2026-04-07
 modified: 2026-04-17
+published: true
 lang: zh
 slug: what-does-vibe-coding-cost
 series: vibecoding

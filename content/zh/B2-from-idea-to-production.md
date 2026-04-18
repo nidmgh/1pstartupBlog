@@ -1,6 +1,7 @@
 ---
 title: 40 小时，从想法到生产
 date: 2026-04-07
+published: true
 lang: zh
 slug: from-idea-to-production
 series: vibecoding

@@ -1,6 +1,7 @@
 ---
 title: Vibe Coding 是一种什么感觉
 date: 2026-04-06
+published: true
 lang: zh
 slug: what-vibe-coding-feels-like
 series: vibecoding

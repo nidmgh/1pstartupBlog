@@ -1,6 +1,7 @@
 ---
 title: Start with Architecture, Not Code
 date: 2026-04-17
+published: true
 lang: en
 slug: start-with-architecture-not-code
 series: vibecoding

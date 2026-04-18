@@ -83,13 +83,19 @@ Two behaviors, two philosophies, one file.
 
 ## Soft vs. Hard Enforcement
 
-The doc-sync reminder is soft — it exits `0` and the commit always proceeds. The tax validation is hard — it exits `1` and blocks the commit. This split is deliberate.
+B6 closed with "soft over hard" — here's where that philosophy lives in code. The FIRE51 hook is deliberately mixed: doc sync is a nudge (`exit 0`), tax validation is a wall (`exit 1`). The rule: **hard-block only when the violation is objectively broken** — failing tests, lint errors, a detected secret. Everything else is a reminder. The tax engine earns the wall because a silent error there compounds into a meaningless retirement projection; doc drift is recoverable, a wrong tax calculation isn't.
 
-**Hard is right when** the violation is objectively breaking something: a test fails, a lint error surfaces, a secret is detected in the diff. The cost of a bad commit outweighs the friction of blocking.
+## Keep Hooks Fast
 
-**Soft is right when** the check is a practice reminder, not a correctness gate. Making doc updates a hard block would generate `git commit --no-verify` habits within a week. A visible reminder at the right moment changes behavior without creating resistance.
+A slow hook is a bypassed hook. My budget: **pre-commit under ~2 seconds, pre-push under ~10.** Past that, the `--no-verify` habit sets in within a week and the guardrail quietly disappears.
 
-You can see both in the FIRE51 hook: doc sync is a nudge, tax engine correctness is a wall. The tax engine is the one module that, if wrong, silently compounds errors into meaningless retirement projections. It earns the wall.
+What doesn't belong in pre-commit:
+
+- The full test suite — run a targeted subset; leave the rest for CI.
+- Network calls — dependency scans, remote linters, anything that can stall on a flaky connection.
+- Anything that requires a clean build from scratch.
+
+Notice what FIRE51's tax-engine gate actually runs: `npm test -- --testPathPattern="tests/validation"`. It's the validation subset, not the full suite. Full tests run in CI. The hook guards only the one class of error that's both likely and catastrophic — bad tax math — and does it fast enough that it never tempts a bypass.
 
 ## Quick Reference
 
@@ -107,7 +113,7 @@ FIRE51 uses `pre-commit` and `pre-push`. Pre-commit catches problems before they
 
 `.git/hooks/` is excluded from git tracking by design. A fresh `git clone` gets an empty hooks folder. Other collaborators don't automatically get your hooks.
 
-Three standard workarounds:
+Four standard workarounds:
 
 1. **Commit the hooks to `scripts/hooks/`, let `setup.sh` symlink them into `.git/hooks/`** — what FIRE51 does. Zero dependencies, one line of setup, works on any machine with bash.
 2. **[Husky](https://typicode.github.io/husky/)** — the Node ecosystem default. Manages hooks as part of `package.json`. Ideal if you're already doing `npm install`.

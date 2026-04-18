@@ -1,7 +1,6 @@
 ---
 title: "Keeping the AI Honest: Lock Files, Tests, and Design Docs"
-date: 2026-04-16
-modified: 2026-04-17
+date: 2026-04-17
 published: true
 lang: en
 slug: keeping-the-ai-honest

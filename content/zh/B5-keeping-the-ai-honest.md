@@ -1,7 +1,6 @@
 ---
 title: "让 AI 保持诚实：锁文件、测试与设计文档"
-date: 2026-04-16
-modified: 2026-04-17
+date: 2026-04-17
 published: true
 lang: zh
 slug: keeping-the-ai-honest

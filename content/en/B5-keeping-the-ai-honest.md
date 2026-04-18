@@ -1,6 +1,7 @@
 ---
 title: "Keeping the AI Honest: Lock Files, Tests, and Design Docs"
 date: 2026-04-16
+modified: 2026-04-17
 lang: en
 slug: keeping-the-ai-honest
 series: vibecoding

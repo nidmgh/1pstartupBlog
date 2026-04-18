@@ -12,9 +12,9 @@ author: MaiMai
 
 Most projects that need git hooks in 2026 reach for a framework: [Husky](https://typicode.github.io/husky/) for the Node ecosystem, [Lefthook](https://lefthook.dev/) for polyglot projects that want parallel execution, the [pre-commit framework](https://pre-commit.com/) for Python-centric stacks. They're all good. They all add a dependency.
 
-FIRE51 uses none of them. The entire pre-commit system is one bash script, checked into `scripts/hooks/`, symlinked into `.git/hooks/` by `setup.sh`. Thirty lines, zero dependencies, written by Claude in one pass, running silently for months. For a solo vibe-coding project, that's the right level of tool.
+FIRE51 doesn't reach for any of the heavier frameworks. It's a solo vibe-coding project — a git hook is enough to hold the engineering discipline. The entire pre-commit system is one bash script, checked into `scripts/hooks/`, symlinked into `.git/hooks/` by `setup.sh`. Thirty lines, zero dependencies, written by Claude in one pass.
 
-This post explains the mechanics, shows the actual script, and covers when to upgrade to a framework.
+Below: the mechanics, the actual script, and when to upgrade to a framework.
 
 ## The Mechanism
 
@@ -83,9 +83,9 @@ Two behaviors, two philosophies, one file.
 
 ## Soft vs. Hard Enforcement
 
-B6 closed with "soft over hard" — here's where that philosophy lives in code. The FIRE51 hook is deliberately mixed: doc sync is a nudge (`exit 0`), tax validation is a wall (`exit 1`). The rule: **hard-block only when the violation is objectively broken** — failing tests, lint errors, a detected secret. Everything else is a reminder. The tax engine earns the wall because a silent error there compounds into a meaningless retirement projection; doc drift is recoverable, a wrong tax calculation isn't.
+The previous post, [Code and Docs in Sync](/blog/en/code-and-docs-in-sync), closed with "soft over hard" — here's where that philosophy lives in code. The FIRE51 hook is deliberately mixed: doc sync is a nudge (`exit 0`), tax validation is a wall (`exit 1`). The rule: **hard-block only when the violation is objectively broken** — failing tests, lint errors, a detected secret. Everything else is a reminder. The tax engine earns the wall because a silent error there compounds into a meaningless retirement projection; doc drift is recoverable, a wrong tax calculation isn't.
 
-## Keep Hooks Fast
+## Keep Hooks Efficient
 
 A slow hook is a bypassed hook. My budget: **pre-commit under ~2 seconds, pre-push under ~10.** Past that, the `--no-verify` habit sets in within a week and the guardrail quietly disappears.
 
@@ -96,6 +96,20 @@ What doesn't belong in pre-commit:
 - Anything that requires a clean build from scratch.
 
 Notice what FIRE51's tax-engine gate actually runs: `npm test -- --testPathPattern="tests/validation"`. It's the validation subset, not the full suite. Full tests run in CI. The hook guards only the one class of error that's both likely and catastrophic — bad tax math — and does it fast enough that it never tempts a bypass.
+
+## The Hook Subset: PolicyEngine as a Case Study
+
+The previous section mentioned that the hook runs a "validation subset" rather than the full suite. What is that subset, exactly — and why is it shaped the way it is?
+
+**Why an external baseline is needed.** AI-written financial code has a large gap between "plausible" and "actually correct." In a retirement projection, a 5% tax error compounded over 45 years becomes a meaningless number. Worse, an AI can happily "fix" a failing tax-engine test by tweaking the inputs — the test turns green, the logic stays wrong, and the bug ships. The only real fix is to bring in an independent baseline the AI can't talk its way around.
+
+[PolicyEngine](https://policyengine.org/) is an open-source tax microsimulation model used by policy researchers. FIRE51 treats it as independent ground truth for the tax engine: same inputs, both engines compute independently, and the result passes only if the deltas fall within tolerance (federal ±$100, state ±$300, NIIT ±$50, SS taxable ±$50).
+
+**Why PolicyEngine's source can't simply be embedded in the product.** PolicyEngine is licensed under AGPL. Running it locally on a dev machine for offline comparison is fine, but bundling it as a library inside the app binary — or exposing it through a public API — triggers AGPL's copyleft obligation, forcing all of FIRE51's closed-source code to be opened along with it. So PolicyEngine lives only on the offline-validation side and never shares a process with production code.
+
+**Why the full PolicyEngine validation isn't in the hook.** The full pipeline (`npm run validate:pe`) batch-calls an external Python service across many tax years and scenarios; one run takes ten-plus minutes and will grow as the project grows. Putting that in pre-commit would immediately trigger the `--no-verify` habit from the previous section — the guardrail would quietly disappear.
+
+**How it's actually triggered.** On the dev machine, a full PolicyEngine pass runs once and snapshots the results into reference-value files under `tests/validation/`. The `npm test` line in the hook compares the current tax engine's output against those snapshots — seconds, not minutes — and only when `TaxEngine.ts` is staged. When do we re-run the full PolicyEngine validation? After any major tax-logic change — a new tax type, a year-parameter update, an IRS rule change — we run it by hand, refresh the snapshots, and then return to normal commits.
 
 ## Quick Reference
 

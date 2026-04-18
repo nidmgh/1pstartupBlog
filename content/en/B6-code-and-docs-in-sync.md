@@ -9,13 +9,15 @@ episode: 6
 author: MaiMai
 ---
 
-<!-- Image placeholder: three-layer enforcement illustration -->
+![](/blog/assets/B6-Code-Doc-inSync.png)
 
 There's an emerging industry term for what happens when AI agents write code without a forcing function: [**AI architecture drift**](https://techdebt.best/ai-architecture-drift/). Agents ignore previously documented decisions, re-introduce deprecated patterns, violate layer boundaries, and invent new conventions mid-project. The industry's 2026 response has been heavy: automated Architecture Decision Record (ADR) generators, LLM-powered doc-linters, PR bots that enforce architectural conformance.
 
 FIRE51 uses a much lighter system. Three layers. No new tools. No dependencies. It works because it sits at the exact points where attention naturally lands — the start of a session, the moment of a commit — and it puts the rules in writing where they survive.
 
 ## The Drift Problem
+
+![](/blog/assets/B6-StaleVSReal.png)
 
 After a few sessions of vibe coding, the architecture document describes a system that no longer exists. New sessions start from a stale map. Design decisions get re-litigated because nobody recorded why they were made. Bugs that were already fixed quietly come back.
 

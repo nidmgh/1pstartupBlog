@@ -10,13 +10,15 @@ translated: true
 author: 迈哥
 ---
 
-<!-- Image placeholder: three-layer enforcement illustration -->
+![](/blog/assets/B6-Code-Doc-inSync.png)
 
 行业正在出现一个新名词来描述 AI Agent 没有约束就写代码的后果：[**AI 架构漂移（AI Architecture Drift）**](https://techdebt.best/ai-architecture-drift/)。Agent 无视此前记录过的决策，重新引入已被废弃的模式，违反分层边界，在项目中途自创新的约定。2026 年行业给出的对策很重：自动化的架构决策记录（ADR）生成器、LLM 驱动的文档 Linter、在 PR 层面强制架构一致性的机器人。
 
 FIRE51 用的是一个轻得多的系统。三层，没有新工具，没有新依赖。它管用，是因为它刚好落在注意力自然到达的节点上——会话开始的那一刻、提交发生的那一刻——并且把规则白纸黑字地留在了仓库里。
 
 ## 漂移问题
+
+![](/blog/assets/B6-StaleVSReal.png)
 
 Vibe Coding 几个会话下来，架构文档描述的是一个已经不存在的系统。新会话从一张过时的地图开始。设计决策被反复争论，因为没人记录过为什么那么决定。已经修过的 Bug 又悄悄地回来了。
 

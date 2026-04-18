@@ -1,6 +1,7 @@
 ---
 title: "Git Hooks: Your Invisible Co-Pilot"
 date: 2026-04-21
+published: true
 lang: en
 slug: git-hooks-invisible-copilot
 series: vibecoding
@@ -8,7 +9,7 @@ episode: 7
 author: MaiMai
 ---
 
-<!-- Image placeholder: git hook / guardrail illustration -->
+![](/blog/assets/B7-Hero-InvisibleCoPilot.png)
 
 Most projects that need git hooks in 2026 reach for a framework: [Husky](https://typicode.github.io/husky/) for the Node ecosystem, [Lefthook](https://lefthook.dev/) for polyglot projects that want parallel execution, the [pre-commit framework](https://pre-commit.com/) for Python-centric stacks. They're all good. They all add a dependency.
 
@@ -98,6 +99,8 @@ What doesn't belong in pre-commit:
 Notice what FIRE51's tax-engine gate actually runs: `npm test -- --testPathPattern="tests/validation"`. It's the validation subset, not the full suite. Full tests run in CI. The hook guards only the one class of error that's both likely and catastrophic — bad tax math — and does it fast enough that it never tempts a bypass.
 
 ## The Hook Subset: PolicyEngine as a Case Study
+
+![](/blog/assets/B7-PolicyEngine-AnswerKey.png)
 
 The previous section mentioned that the hook runs a "validation subset" rather than the full suite. What is that subset, exactly — and why is it shaped the way it is?
 

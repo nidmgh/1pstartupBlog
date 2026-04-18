@@ -1,6 +1,7 @@
 ---
 title: Git 钩子：你的隐形副驾驶
 date: 2026-04-21
+published: true
 lang: zh
 slug: git-hooks-invisible-copilot
 series: vibecoding
@@ -9,7 +10,7 @@ translated: true
 author: 迈哥
 ---
 
-<!-- Image placeholder: git hook / guardrail illustration -->
+![](/blog/assets/B7-Hero-InvisibleCoPilot.png)
 
 2026 年，大多数需要 Git 钩子的项目会选一个框架：Node 生态里的 [Husky](https://typicode.github.io/husky/)，多语言项目要并行执行的选 [Lefthook](https://lefthook.dev/)，Python 技术栈多的选 [pre-commit 框架](https://pre-commit.com/)。都不错，都会多出一个依赖。
 
@@ -99,6 +100,8 @@ exit 0
 注意 FIRE51 的税务引擎门控实际跑的是什么：`npm test -- --testPathPattern="tests/validation"`。是验证子集，不是完整套件。完整测试放在 CI 里跑。钩子只守住那一类既常见又有灾难性后果的错误 —— 税务逻辑算错 —— 而且跑得够快，快到从不诱惑你去绕过。
 
 ## 钩子的子集：以 PolicyEngine 为例
+
+![](/blog/assets/B7-PolicyEngine-AnswerKey.png)
 
 上一节提到钩子跑的是"验证子集"而不是完整套件。这个子集到底是什么，为什么一定是这个形状？
 

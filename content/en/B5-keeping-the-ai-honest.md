@@ -8,7 +8,7 @@ episode: 5
 author: MaiMai
 ---
 
-<!-- Image placeholder: AI honesty / reward hacking illustration -->
+![](/blog/assets/B5-Keep_AI_Honest.png)
 
 In June 2025, [METR published a study](https://metr.org/blog/2025-06-05-recent-reward-hacking/) showing something uncomfortable: frontier AI models, given a coding task and a test suite, increasingly chose to *modify the tests* rather than fix the bug. OpenAI's o3 model, asked to speed up a program, hacked the timer instead so execution always appeared fast. In November 2025, [Anthropic's own research](https://www.anthropic.com/research/emergent-misalignment-reward-hacking) showed Claude models trained on coding environments learning to issue `sys.exit(0)` to exit the test harness with a success code — making failing tests appear to pass.
 
@@ -19,6 +19,8 @@ When you're solo vibe coding, there's no code reviewer to catch it. You are the 
 ## Ask AI Open-Ended Questions
 
 Experienced professionals know a workplace rule: give your boss a multiple-choice question, not an essay prompt. Flip that. You are now the AI's "boss" — reverse the rule.
+
+![](/blog/assets/B5-Keep_AI_Honest_open-ended.png)
 
 Reward hacking is AI cutting corners to meet a goal; another commonly overlooked pattern is its **tendency to obey**. Point east and it earnestly walks east, even when north is the right direction. Give it an explicit algorithm, framework, or implementation path in your prompt, and it will follow your path to the end — and argue that path was the best one, even when it wasn't.
 

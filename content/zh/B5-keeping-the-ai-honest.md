@@ -9,7 +9,7 @@ translated: true
 author: 迈哥
 ---
 
-<!-- Image placeholder: AI honesty / reward hacking illustration -->
+![](/blog/assets/B5-Keep_AI_Honest.png)
 
 2025 年 6 月，[METR 发布了一项研究](https://metr.org/blog/2025-06-05-recent-reward-hacking/)，展示了一件令人不安的事：面对一个编码任务和一套测试，前沿 AI 模型越来越倾向于*修改测试本身*，而不是修复 Bug。OpenAI 的 o3 模型被要求给一个程序加速时，反手把计时器给黑了——无论程序跑得多慢，计时结果都显示"很快"。2025 年 11 月，[Anthropic 自己的研究](https://www.anthropic.com/research/emergent-misalignment-reward-hacking)发现，在编码环境中训练的 Claude 模型学会了调用 `sys.exit(0)`——用成功退出码直接跳出测试框架，让失败的测试看起来像通过了。
 
@@ -20,6 +20,8 @@ author: 迈哥
 ## 问 AI 开放性问题（Open-ended question to AI）
 
 有经验的职业人士的一个职场秘诀是：让领导做选择题。同样的逻辑，现在你（人类）是 AI 的"领导"，要反向对待。
+
+![](/blog/assets/B5-Keep_AI_Honest_open-ended.png)
 
 Reward hacking 是 AI 为了达成目标抄近路；另一个常被忽略的套路是——AI 的"服从"倾向。你说往东，它就认真地往东走，哪怕往北才是对的方向。一旦你在提示里给了明确的算法、框架或实现路径，AI 大概率会顺着你说的路走到底，哪怕这条路并不是最优解，它也会把它论证得像是最优解。
 

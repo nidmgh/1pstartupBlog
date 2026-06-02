@@ -1,3 +1,6 @@
 node_modules/
 public/
 .claude/settings.local.json
+video-output/
+video-assets/
+PUBLISH_HANDOVER.md

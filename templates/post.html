@@ -143,9 +143,11 @@
     /* Standalone figure: inline video or YouTube embed + caption */
     article > figure { margin: 28px 0; }
     article > figure video,
-    article > figure iframe {
+    article > figure iframe,
+    article > figure img {
       width: 100%;
       display: block;
+      margin: 0;
       border-radius: var(--radius);
     }
     article > figure figcaption {

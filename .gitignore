@@ -1,6 +1,7 @@
 node_modules/
 public/
 .claude/settings.local.json
+.DS_Store
 video-output/
 video-assets/
 PUBLISH_HANDOVER.md
